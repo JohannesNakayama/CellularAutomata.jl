@@ -100,3 +100,41 @@ automaton
 
 imshow(automaton, cmap = "gray")
 gcf()
+
+
+### EXAMPLE 4: RULE 30 ###
+
+# push iterations into this array
+automaton = []
+
+# initial configuration
+iter = vcat(zeros(Int, 100), [1], zeros(Int, 100))
+push!(automaton, copy(iter))
+
+# construct graph
+g = LightGraphs.grid([length(iter), 1], periodic=true)
+# gplot(g)
+
+for i in 1:100
+    tmp = next_iteration(iter, g, 30)
+    push!(automaton, copy(tmp))
+    iter = copy(tmp)
+end
+
+automaton
+
+imshow(automaton, cmap = "gray")
+gcf()
+
+
+
+
+
+
+
+
+
+
+
+
+
