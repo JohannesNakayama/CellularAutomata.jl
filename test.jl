@@ -27,82 +27,53 @@ function next_iteration(iter, g, rule)
 end
 
 
-### EXAMPLE 1: RULE 30 ###
+
+
+### EXAMPLE 1: RULE 178 ###
 
 # push iterations into this array
 automaton = []
 
 # initial configuration
-iter = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+iter = bitrand(100)
 push!(automaton, copy(iter))
 
 # construct graph
 g = LightGraphs.grid([length(iter), 1], periodic=true)
-# gplot(g)
 
-for i in 1:30
-    tmp = next_iteration(iter, g, 30)
-    push!(automaton, copy(tmp))
-    iter = copy(tmp)
-end
-
-automaton
-
-imshow(automaton, cmap = "gray")
-gcf()
-
-
-### EXAMPLE 2: RULE 178 ###
-
-# push iterations into this array
-automaton = []
-
-# initial configuration
-iter = bitrand(50)
-push!(automaton, copy(iter))
-
-# construct graph
-g = LightGraphs.grid([length(iter), 1], periodic=true)
-# gplot(g)
-
-for i in 1:30
+# run and display automaton
+for i in 1:100
     tmp = next_iteration(iter, g, 178)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
 end
-
-automaton
-
 imshow(automaton, cmap = "gray")
 gcf()
 
 
-### EXAMPLE 3: RULE 146 ###
+### EXAMPLE 2: RULE 146 ###
 
 # push iterations into this array
 automaton = []
 
 # initial configuration
-iter = bitrand(50)
+iter = bitrand(100)
 push!(automaton, copy(iter))
 
 # construct graph
 g = LightGraphs.grid([length(iter), 1], periodic=true)
-# gplot(g)
 
-for i in 1:30
+# run and display automaton
+for i in 1:100
     tmp = next_iteration(iter, g, 146)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
 end
-
-automaton
-
 imshow(automaton, cmap = "gray")
 gcf()
 
 
-### EXAMPLE 4: RULE 30 ###
+### EXAMPLE 3: RULE 30 ###
 
 # push iterations into this array
 automaton = []
@@ -113,16 +84,13 @@ push!(automaton, copy(iter))
 
 # construct graph
 g = LightGraphs.grid([length(iter), 1], periodic=true)
-# gplot(g)
 
+# run and display automaton
 for i in 1:100
     tmp = next_iteration(iter, g, 30)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
 end
-
-automaton
-
 imshow(automaton, cmap = "gray")
 gcf()
 
