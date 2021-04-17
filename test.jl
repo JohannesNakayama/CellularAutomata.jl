@@ -91,9 +91,11 @@ for i in 1:200
     push!(automaton, copy(tmp))
     iter = copy(tmp)
 end
-imshow(automaton, cmap = "gray")
+fig = figure(figsize=(10, 5))
+imshow(automaton, cmap = :gray)
+PyPlot.axis("off")
 gcf()
-
+savefig(joinpath("media", "rule30.png"))
 
 
 
