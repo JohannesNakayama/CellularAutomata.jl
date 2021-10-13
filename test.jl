@@ -43,6 +43,7 @@ g = LightGraphs.grid([length(iter), 1], periodic=true)
 
 # run and display automaton
 for i in 1:100
+    global iter
     tmp = next_iteration(iter, g, 178)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
@@ -65,6 +66,7 @@ g = LightGraphs.grid([length(iter), 1], periodic=true)
 
 # run and display automaton
 for i in 1:100
+    global iter
     tmp = next_iteration(iter, g, 146)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
@@ -87,6 +89,7 @@ g = LightGraphs.grid([length(iter), 1], periodic=true)
 
 # run and display automaton
 for i in 1:200
+    global iter
     tmp = next_iteration(iter, g, 30)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
@@ -117,6 +120,7 @@ g = LightGraphs.grid([length(iter), 1], periodic=true)
 
 # run and display automaton
 for i in 1:100
+    global iter
     tmp = next_iteration(iter, g, 30)
     push!(automaton, copy(tmp))
     iter = copy(tmp)
