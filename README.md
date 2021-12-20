@@ -22,7 +22,11 @@ Elementary cellular automata are often displayed as a sequence of state iteratio
 (In this case, white cells represent cells with state 1 and black cells represent cells with state 0.)
 
 
+## TO DO
 
+[ ] improve plotting (colorscheme)  
+[ ] refactor the entire mess  
+[ ] develop a workflow  
 
 
 
