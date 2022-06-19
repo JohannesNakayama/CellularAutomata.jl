@@ -1,19 +1,19 @@
-mutable struct ElementaryCellularAutomaton
+mutable struct ElementaryCA
     initial_config::AbstractArray
     states::AbstractArray
-    function ElementaryCellularAutomaton(initial_config)
+    function ElementaryCA(initial_config)
         new(initial_config, [initial_config])
     end
 end
 
-function run!(automaton::ElementaryCellularAutomaton, rule::Int, n::Int)
+function run!(automaton::ElementaryCA, rule::Int, n::Int)
     for i in 1:n
         step!(automaton, rule)
     end
     return automaton
 end
 
-function step!(automaton::ElementaryCellularAutomaton, rule::Int)
+function step!(automaton::ElementaryCA, rule::Int)
     g = Graphs.grid([length(automaton.initial_config), 1], periodic = true)
     push!(automaton.states, next_iteration(last(automaton.states), g, rule))
     return automaton
@@ -41,6 +41,6 @@ function get_bit_rep(iter, idx, g)
     return bit_rep
 end
 
-function plot(automaton::ElementaryCellularAutomaton)
-    imshow(automaton.states, cmap="gray")
+function plot(automaton::ElementaryCA)
+    PyPlot.imshow(automaton.states, cmap="gray")
 end

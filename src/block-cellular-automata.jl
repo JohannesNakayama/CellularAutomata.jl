@@ -1,11 +1,11 @@
-mutable struct BlockCellularAutomaton
+mutable struct BlockCA
     states::Array{Any}
-    function BlockCellularAutomaton(init_state::AbstractMatrix, init_start::Int)
+    function BlockCA(init_state::AbstractMatrix, init_start::Int)
         new([(init_start, init_state)])
     end
 end
 
-function run!(automaton::BlockCellularAutomaton, steps::Int, rule::Function)
+function run!(automaton::BlockCA, steps::Int, rule::Function)
     for step in 1:steps
         # curr_state = deepcopy(automaton.states[end][2])
         # start = automaton.states[end][1] == 1 ? 2 : 1
@@ -29,7 +29,7 @@ function run!(automaton::BlockCellularAutomaton, steps::Int, rule::Function)
     return automaton
 end
 
-function step!(automaton::BlockCellularAutomaton, rule::Function)
+function step!(automaton::BlockCA, rule::Function)
     curr_state = deepcopy(automaton.states[end][2])
     start = automaton.states[end][1] == 1 ? 2 : 1
     next_state = zeros(Bool, size(curr_state))
@@ -117,7 +117,7 @@ function tron(
     return next_state
 end
 
-function animate(automaton::BlockCellularAutomaton, speed::AbstractFloat)
+function animate(automaton::BlockCA, speed::AbstractFloat)
     println("This function plays a terminal animation of the automaton you provided.")
     println("The implementation is sloppy and ad-hoc, I just wanted something flashy to show in the terminal...")
     println("As the print function is slow, this animation might flicker quite a lot, especially for automata of large size (e.g. (100, 100)).")

@@ -13,13 +13,13 @@ using Sixel
 using ImageInTerminal
 
 # ECA
-export ElementaryCellularAutomaton
+export ElementaryCA
 export run!
 export step!
 export plot
 
 # BCA
-export BlockCellularAutomaton
+export BlockCA
 export run!
 export critters
 export reverse_critters
