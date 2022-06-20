@@ -3,7 +3,6 @@ module CellularAutomata
 # Dependencies
 using Graphs
 using Random
-using PyPlot
 using UnicodePlots
 using ColorSchemes
 using Random
@@ -24,7 +23,7 @@ export run!
 export critters
 export reverse_critters
 export tron
-export animate
+export animate_automaton
 
 # Includes
 include("elementary-cellular-automata.jl")

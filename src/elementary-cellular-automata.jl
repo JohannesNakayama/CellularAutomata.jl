@@ -35,9 +35,13 @@ function wrapped_idx(i, n_cells)
 end
 
 function plot_automaton(automaton::ElementaryCA)
-    fig, ax = PyPlot.subplots(1, 1)
-    img = ax.imshow(automaton.states, cmap = "gray")
-    ax.set_xticks([])
-    ax.set_yticks([])
-    return true
+    px_map = fill(
+        false,
+        length(automaton.states),
+        length(automaton.initial_config)
+    )
+    for (i, state) in enumerate(automaton.states)
+        px_map[i, :] = state
+    end
+    ImageInTerminal.imshow(Gray{N0f8}.(Int.(px_map)))
 end

@@ -117,7 +117,7 @@ function tron(
     return next_state
 end
 
-function animate(automaton::BlockCA, speed::AbstractFloat)
+function animate_automaton(automaton::BlockCA, speed::AbstractFloat)
     println("This function plays a terminal animation of the automaton you provided.")
     println("The implementation is sloppy and ad-hoc, I just wanted something flashy to show in the terminal...")
     println("As the print function is slow, this animation might flicker quite a lot, especially for automata of large size (e.g. (100, 100)).")
