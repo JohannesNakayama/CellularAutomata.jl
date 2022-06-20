@@ -19,12 +19,14 @@ function step!(automaton::ElementaryCA, rule::Int)
     return automaton
 end
 
-function next_iteration(iter, g, rule)
-    return [next_state(get_bit_rep(iter, i, g), rule) for i in 1:length(iter)]
+function next_iteration(current_state, g, rule)
+    return [
+        next_state(get_bit_rep(current_state, i, g), rule)
+        for i in 1:length(current_state)
+    ]
 end
 
 function next_state(bit_rep, rule)
-    # bit_rule = last(bitstring(rule), 8)
     bit_rule = bitstring(UInt8(rule))
     rule_index = 8 - parse(Int, bit_rep, base = 2)
     next_state = bit_rule[rule_index]
@@ -42,6 +44,9 @@ function get_bit_rep(iter, idx, g)
     return bit_rep
 end
 
-function plot(automaton::ElementaryCA)
-    PyPlot.imshow(automaton.states, cmap="gray")
+function plot_automaton(automaton::ElementaryCA)
+    fig, ax = PyPlot.subplots(1, 1)
+    img = ax.imshow(automaton.states, cmap="gray")
+    ax.set_xticks([])
+    ax.set_yticks([])
 end
