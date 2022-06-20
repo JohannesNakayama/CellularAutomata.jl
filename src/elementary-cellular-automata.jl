@@ -6,8 +6,8 @@ mutable struct ElementaryCA
     end
 end
 
-function run!(automaton::ElementaryCA, rule::Int, n::Int)
-    for i in 1:n
+function run!(automaton::ElementaryCA, rule::Int, steps::Int)
+    for i in 1:steps
         step!(automaton, rule)
     end
     return automaton
@@ -24,7 +24,8 @@ function next_iteration(iter, g, rule)
 end
 
 function next_state(bit_rep, rule)
-    bit_rule = last(bitstring(rule), 8)
+    # bit_rule = last(bitstring(rule), 8)
+    bit_rule = bitstring(UInt8(rule))
     rule_index = 8 - parse(Int, bit_rep, base = 2)
     next_state = bit_rule[rule_index]
     return parse(Int, next_state)
