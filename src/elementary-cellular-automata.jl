@@ -1,4 +1,4 @@
-mutable struct ElementaryCA
+struct ElementaryCA
     initial_config::AbstractArray
     states::AbstractArray
     function ElementaryCA(initial_config)
@@ -14,39 +14,30 @@ function run!(automaton::ElementaryCA, rule::Int, steps::Int)
 end
 
 function step!(automaton::ElementaryCA, rule::Int)
-    g = Graphs.grid([length(automaton.initial_config), 1], periodic = true)
-    push!(automaton.states, next_iteration(last(automaton.states), g, rule))
+    current_state = last(automaton.states)
+    updated_state = Bool[]
+    bit_rule = bitstring(UInt8(rule))
+    n_cells = length(current_state)
+    for (i, cell_state) in enumerate(current_state)
+        left_neigh = current_state[wrapped_idx(i - 1, n_cells)]
+        right_neigh = current_state[wrapped_idx(i + 1, n_cells)]
+        triple = [left_neigh, cell_state, right_neigh]
+        triple_as_bit = reduce(*, string.(Int.(triple)))
+        rule_index = 8 - parse(Int, triple_as_bit, base = 2)
+        push!(updated_state, copy(parse(Int, bit_rule[rule_index])))
+    end
+    push!(automaton.states, updated_state)
     return automaton
 end
 
-function next_iteration(current_state, g, rule)
-    return [
-        next_state(get_bit_rep(current_state, i, g), rule)
-        for i in 1:length(current_state)
-    ]
-end
-
-function next_state(bit_rep, rule)
-    bit_rule = bitstring(UInt8(rule))
-    rule_index = 8 - parse(Int, bit_rep, base = 2)
-    next_state = bit_rule[rule_index]
-    return parse(Int, next_state)
-end
-
-function get_bit_rep(iter, idx, g)
-    n = copy(neighbors(g, idx))
-    push!(n, idx)
-    n_with_mod = [(i, i % 10) for i in n]
-    sort!(n_with_mod, by = x -> x[2])
-    n = [i[1] for i in n_with_mod]
-    cell_bits = [iter[i] for i in n]
-    bit_rep = reduce(*, string.(Int.(cell_bits)))
-    return bit_rep
+function wrapped_idx(i, n_cells)
+    return (((i) + n_cells - 1) % n_cells) + 1
 end
 
 function plot_automaton(automaton::ElementaryCA)
     fig, ax = PyPlot.subplots(1, 1)
-    img = ax.imshow(automaton.states, cmap="gray")
+    img = ax.imshow(automaton.states, cmap = "gray")
     ax.set_xticks([])
     ax.set_yticks([])
+    return true
 end

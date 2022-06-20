@@ -16,7 +16,7 @@ using ImageInTerminal
 export ElementaryCA
 export run!
 export step!
-export plot
+export plot_automaton
 
 # BCA
 export BlockCA
