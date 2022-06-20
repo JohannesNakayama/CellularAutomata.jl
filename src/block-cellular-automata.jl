@@ -130,7 +130,7 @@ function animate(automaton::BlockCA, speed::AbstractFloat)
                 continue
             end
             Base.run(`clear`)
-            imshow(Gray{N0f8}.(Int.(frame[2])))
+            ImageInTerminal.imshow(Gray{N0f8}.(Int.(frame[2])))
             sleep(speed)
         end
     else
