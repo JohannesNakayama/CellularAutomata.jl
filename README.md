@@ -24,7 +24,7 @@ Elementary cellular automata are often displayed as a sequence of state iteratio
 
 ## TO DO
 
-[ ] improve plotting (colorscheme)  
+[ ] fix plotting  
 [ ] refactor the entire mess  
 [ ] develop a workflow  
 
